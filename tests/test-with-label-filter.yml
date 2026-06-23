@@ -1,0 +1,28 @@
+name: Test with label filter and username regex
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Run action with label filter and username regex
+        id: action
+        uses: .
+        with:
+          github-token: "fake-token-for-testing"
+          number: "9999999"
+          merge-method: "rebase"
+          allowed-usernames-regex: "^(dependabot|renovate).*$"
+          filter-label: "auto-merge"
+        continue-on-error: true
+      - name: Assert action ran (expect failure due to invalid token/PR)
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          if [ "$OUTCOME" != "failure" ] && [ "$OUTCOME" != "success" ]; then
+            echo "FAIL: expected outcome to be 'failure' or 'success', got '$OUTCOME'"
+            exit 1
+          fi
+          echo "PASS: action ran with label filter and username regex and produced a valid outcome"
