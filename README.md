@@ -8,6 +8,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 | Version | Tag | Upstream commit |
 |---------|-----|-----------------|
+| v1.0.3 | [`v1.0.3`](https://github.com/chainguard-actions/sudo-bot-action-pull-request-merge/tree/v1.0.3) | [`7f30b68`](https://github.com/sudo-bot/action-pull-request-merge/commit/7f30b6892e411691f80e8196d601e6df1c284802) |
 | v2 | [`v2`](https://github.com/chainguard-actions/sudo-bot-action-pull-request-merge/tree/v2) | [`53b588d`](https://github.com/sudo-bot/action-pull-request-merge/commit/53b588daa0c2e217534166cda8e68e9d6faaa685) |
 
 ## Privacy
