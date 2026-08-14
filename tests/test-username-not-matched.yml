@@ -1,0 +1,27 @@
+name: Test username not matched
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Run action with non-matching username regex
+        id: action
+        # The regex ^NOMATCH_IMPOSSIBLE_USERNAME_XYZ$ will never match any real actor,
+        # so the action should warn and exit 0 without attempting to merge.
+        continue-on-error: true
+        uses: .
+        with:
+          github-token: ${{ github.token }}
+          number: "1"
+          merge-method: merge
+          allowed-usernames-regex: "^NOMATCH_IMPOSSIBLE_USERNAME_XYZ$"
+      - name: Assert action succeeded (early exit due to username mismatch)
+        run: |
+          echo "outcome: ${{ steps.action.outcome }}"
+          if [ "${{ steps.action.outcome }}" != "success" ]; then
+            echo "FAIL: expected action to succeed (warn and return early) but got: ${{ steps.action.outcome }}"
+            exit 1
+          fi
+          echo "PASS: action exited successfully with username-not-matched warning"

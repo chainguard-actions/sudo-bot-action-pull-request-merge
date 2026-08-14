@@ -1,6 +1,16 @@
 {
   "owner": "sudo-bot",
   "repo": "action-pull-request-merge",
-  "version": "",
-  "url": "https://github.com/sudo-bot/action-pull-request-merge"
+  "version": "v1.2.0",
+  "commit_sha": "5b58b5cb1e46bda23160c3a6d56beeec7036c7e2",
+  "url": "https://github.com/sudo-bot/action-pull-request-merge",
+  "policy_sha": "d636be7e43ef829af6e853da6b3c7566db9f72fe",
+  "test_policy_sha": "843adf9e4b8f85d0c08b27b9d0b09dd094b54702",
+  "test_agent_version": "2",
+  "harden_agent_version": "2",
+  "node_artifact": {
+    "gcs_uri": "gs://prod-actions-node-artifacts/node-artifacts/sudo-bot/action-pull-request-merge/v1.2.0/sha256-9264ace03012674838529557b420f817fdd6946677561481cf17344efeea821a.tar.gz",
+    "sha256": "9264ace03012674838529557b420f817fdd6946677561481cf17344efeea821a",
+    "size_bytes": 795703
+  }
 }

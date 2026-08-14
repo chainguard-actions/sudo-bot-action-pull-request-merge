@@ -1,0 +1,37 @@
+name: "pull-request merge"
+author: williamdes
+description: "merge a pull-request when an event triggers the action"
+inputs:
+    github-token:
+        description: "GitHub Token"
+        required: true
+    number:
+        description: "Pull Request number"
+        required: true
+    merge-method:
+        description: "The merge method: merge,squash,rebase,fast-forward"
+        required: false
+        default: "merge"
+    allowed-usernames-regex:
+        description: "The allowed usernames in javascript regex format"
+        required: false
+        default: "^.*$"
+    filter-label:
+        description: "The label that will trigger the merge, (empty or absent to disable the check)"
+        required: false
+        default: ""
+    merge-title:
+        description: "The merge title"
+        required: false
+        default: ""
+    merge-message:
+        description: "The merge message"
+        required: false
+        default: ""
+
+branding:
+    icon: "git-pull-request"
+    color: blue
+runs:
+    using: "node16"
+    main: "index.js"

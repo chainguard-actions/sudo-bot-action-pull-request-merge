@@ -1,0 +1,28 @@
+name: Test filter label with username skip
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Run action with filter-label and non-matching username
+        id: action
+        # Using filter-label input; username regex won't match so action exits early safely.
+        # This tests that the filter-label input is accepted without errors.
+        continue-on-error: true
+        uses: .
+        with:
+          github-token: ${{ github.token }}
+          number: "1"
+          merge-method: merge
+          allowed-usernames-regex: "^NOMATCH_IMPOSSIBLE_USERNAME_XYZ$"
+          filter-label: "auto-merge"
+      - name: Assert action succeeded (early exit due to username mismatch)
+        run: |
+          echo "outcome: ${{ steps.action.outcome }}"
+          if [ "${{ steps.action.outcome }}" != "success" ]; then
+            echo "FAIL: expected action to succeed (warn and return early) but got: ${{ steps.action.outcome }}"
+            exit 1
+          fi
+          echo "PASS: action exited successfully with filter-label set and username-not-matched warning"
