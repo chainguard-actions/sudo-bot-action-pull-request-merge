@@ -1,0 +1,33 @@
+name: Test squash merge method input
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Run action with squash merge-method
+        id: action
+        # merge-method set to "squash".
+        # Username regex blocks the actor so the action exits early (success)
+        # without touching any real PR — safe to run in CI.
+        uses: .
+        with:
+          github-token: ${{ github.token }}
+          number: "1"
+          filter-label: "automerge"
+          allowed-usernames-regex: "^NOMATCH_USER_THAT_DOES_NOT_EXIST$"
+          merge-method: "squash"
+        continue-on-error: true
+
+      - name: Assert action succeeded with squash merge-method
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          if [ "$OUTCOME" != "success" ]; then
+            echo "FAIL: expected action to succeed (early return via username block) with squash merge-method, got: $OUTCOME"
+            exit 1
+          fi
+          echo "PASS: action accepted squash merge-method and returned early"

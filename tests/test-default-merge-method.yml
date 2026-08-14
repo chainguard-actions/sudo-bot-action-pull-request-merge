@@ -1,0 +1,33 @@
+name: Test default merge method input handling
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Run action without specifying merge-method (uses default)
+        id: action
+        # merge-method defaults to "merge" per action.yml.
+        # Username regex blocks the actor so the action exits early (success)
+        # without touching any real PR — safe to run in CI.
+        uses: .
+        with:
+          github-token: ${{ github.token }}
+          number: "1"
+          filter-label: "automerge"
+          allowed-usernames-regex: "^NOMATCH_USER_THAT_DOES_NOT_EXIST$"
+          # merge-method intentionally omitted to exercise the default
+        continue-on-error: true
+
+      - name: Assert action succeeded with default merge-method
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          if [ "$OUTCOME" != "success" ]; then
+            echo "FAIL: expected action to succeed (early return via username block) with default merge-method, got: $OUTCOME"
+            exit 1
+          fi
+          echo "PASS: action accepted default merge-method and returned early"

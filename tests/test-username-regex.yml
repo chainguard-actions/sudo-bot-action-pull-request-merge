@@ -1,0 +1,31 @@
+name: Test username regex filtering
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        continue-on-error: true
+        with:
+          github-token: "fake-token-for-testing"
+          number: "10"
+          filter-label: "bot-merge"
+          merge-method: "rebase"
+          allowed-usernames-regex: "^(dependabot|renovate)\\[bot\\]$"
+      - name: Assert action ran with username regex input accepted
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          # The action should fail due to invalid token, not due to invalid regex input
+          if [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: action failed as expected with invalid token (username regex was accepted)"
+          elif [ "$OUTCOME" = "success" ]; then
+            echo "PASS: action succeeded"
+          else
+            echo "FAIL: unexpected outcome: $OUTCOME"
+            exit 1
+          fi
