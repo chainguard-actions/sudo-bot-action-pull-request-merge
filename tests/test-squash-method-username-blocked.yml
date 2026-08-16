@@ -1,0 +1,23 @@
+name: Test squash method with username blocked
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_ACTOR: some-bot-user
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          github-token: fake-token-not-used
+          number: "42"
+          merge-method: squash
+          allowed-usernames-regex: "^no-match-user$"
+          merge-title: "Squash merge title"
+          merge-message: "Squash merge message"
+      - name: Assert action completed without error
+        run: |
+          echo "Action completed successfully (username did not match, early exit expected)"
+          echo "PASS"

@@ -1,0 +1,21 @@
+name: Test username filter (no match exits cleanly)
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          github-token: ${{ github.token }}
+          number: "1"
+          merge-method: merge
+          # Regex that matches nothing — actor will never match, so action
+          # logs a warning and returns early without touching the GitHub API.
+          allowed-usernames-regex: "^$"
+      - name: Assert action completed without error
+        run: |
+          echo "Action completed successfully (username did not match, early return)"
+          echo "PASS"
