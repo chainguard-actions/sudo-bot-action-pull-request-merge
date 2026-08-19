@@ -1,0 +1,30 @@
+name: Test allowed-usernames-regex filtering
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - id: action
+        uses: .
+        continue-on-error: true
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: "999999"
+          merge-method: "squash"
+          allowed-usernames-regex: "^NOMATCH_USER_ONLY_XYZ_12345$"
+
+      - name: Assert action succeeded (username did not match, action skipped gracefully)
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          # When the actor username does not match the regex, the action
+          # logs a warning and exits 0 (SkippedActor). It does NOT fail.
+          if [ "$OUTCOME" != "success" ]; then
+            echo "FAIL: expected action to succeed (skip) when username does not match, got outcome=$OUTCOME"
+            exit 1
+          fi
+          echo "PASS: action correctly skipped when username did not match regex"

@@ -34,4 +34,4 @@ branding:
     color: blue
 runs:
     using: "docker"
-    image: "docker://ghcr.io/sudo-bot/action-pull-request-merge@sha256:5823f889428ed4db84e853000bd79ed23af0fb9b758d7b68457874b56a870597" # latest
+    image: "docker://ghcr.io/sudo-bot/action-pull-request-merge:latest@sha256:5823f889428ed4db84e853000bd79ed23af0fb9b758d7b68457874b56a870597"
