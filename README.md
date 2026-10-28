@@ -6,12 +6,12 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 ## Versions
 
-| Version | Tag | Upstream commit |
-|---------|-----|-----------------|
-| v1.0.3 | [`v1.0.3`](https://github.com/chainguard-actions/sudo-bot-action-pull-request-merge/tree/v1.0.3) | [`7f30b68`](https://github.com/sudo-bot/action-pull-request-merge/commit/7f30b6892e411691f80e8196d601e6df1c284802) |
-| v1.1.0 | [`v1.1.0`](https://github.com/chainguard-actions/sudo-bot-action-pull-request-merge/tree/v1.1.0) | [`63e3b8f`](https://github.com/sudo-bot/action-pull-request-merge/commit/63e3b8fbc04081354c7de47a38d8d8edeefe4be0) |
-| v1.2.0 | [`v1.2.0`](https://github.com/chainguard-actions/sudo-bot-action-pull-request-merge/tree/v1.2.0) | [`5b58b5c`](https://github.com/sudo-bot/action-pull-request-merge/commit/5b58b5cb1e46bda23160c3a6d56beeec7036c7e2) |
-| v2 | [`v2`](https://github.com/chainguard-actions/sudo-bot-action-pull-request-merge/tree/v2) | [`53b588d`](https://github.com/sudo-bot/action-pull-request-merge/commit/53b588daa0c2e217534166cda8e68e9d6faaa685) |
+| Version | Tag | Upstream commit | Hardening report |
+|---------|-----|-----------------|------------------|
+| v1.0.3 | [`v1.0.3`](https://github.com/chainguard-actions/sudo-bot-action-pull-request-merge/tree/v1.0.3) | [`7f30b68`](https://github.com/sudo-bot/action-pull-request-merge/commit/7f30b6892e411691f80e8196d601e6df1c284802) | [`HARDENING.md`](https://github.com/chainguard-actions/sudo-bot-action-pull-request-merge/blob/v1.0.3/HARDENING.md) |
+| v1.1.0 | [`v1.1.0`](https://github.com/chainguard-actions/sudo-bot-action-pull-request-merge/tree/v1.1.0) | [`63e3b8f`](https://github.com/sudo-bot/action-pull-request-merge/commit/63e3b8fbc04081354c7de47a38d8d8edeefe4be0) | [`HARDENING.md`](https://github.com/chainguard-actions/sudo-bot-action-pull-request-merge/blob/v1.1.0/HARDENING.md) |
+| v1.2.0 | [`v1.2.0`](https://github.com/chainguard-actions/sudo-bot-action-pull-request-merge/tree/v1.2.0) | [`5b58b5c`](https://github.com/sudo-bot/action-pull-request-merge/commit/5b58b5cb1e46bda23160c3a6d56beeec7036c7e2) | [`HARDENING.md`](https://github.com/chainguard-actions/sudo-bot-action-pull-request-merge/blob/v1.2.0/HARDENING.md) |
+| v2 | [`v2`](https://github.com/chainguard-actions/sudo-bot-action-pull-request-merge/tree/v2) | [`53b588d`](https://github.com/sudo-bot/action-pull-request-merge/commit/53b588daa0c2e217534166cda8e68e9d6faaa685) | [`HARDENING.md`](https://github.com/chainguard-actions/sudo-bot-action-pull-request-merge/blob/v2/HARDENING.md) |
 
 ## Privacy
 
